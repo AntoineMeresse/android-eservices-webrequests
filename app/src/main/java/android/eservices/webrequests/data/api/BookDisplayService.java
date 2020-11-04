@@ -10,8 +10,8 @@ import retrofit2.http.Query;
 
 public interface BookDisplayService {
     @GET("volumes/{id}")
-    Single<Book> getBook(@Path("id") String id, @Path("key") String apikey);
+    Single<Book> getBook(@Path("id") String id, @Query("key") String apikey);
 
     @GET("volumes")
-    Single<BookSearchResponse> searchBooks(@Path("q") String keyWords, @Query("key") String apikey);
+    Single<BookSearchResponse> searchBooks(@Query("q") String keyWords, @Query("key") String apikey);
 }

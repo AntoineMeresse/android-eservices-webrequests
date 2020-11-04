@@ -2,10 +2,10 @@ package android.eservices.webrequests.data.di;
 
 import android.content.Context;
 import android.eservices.webrequests.data.api.BookDisplayService;
-//import android.eservices.webrequests.data.db.BookDatabase;
-//import android.eservices.webrequests.data.repository.bookdisplay.BookDisplayDataRepository;
-//import android.eservices.webrequests.data.repository.bookdisplay.local.BookDisplayLocalDataSource;
-//import android.eservices.webrequests.data.repository.bookdisplay.mapper.BookToBookEntityMapper;
+import android.eservices.webrequests.data.repository.bookdisplay.BookDisplayDataRepository;
+import android.eservices.webrequests.data.repository.bookdisplay.BookDisplayRepository;
+import android.eservices.webrequests.data.repository.bookdisplay.local.BookDisplayLocalDataSource;
+import android.eservices.webrequests.data.repository.bookdisplay.remote.BookDisplayRemoteDataSource;
 import android.eservices.webrequests.presentation.viewmodel.ViewModelFactory;
 
 import com.facebook.stetho.okhttp3.StethoInterceptor;
@@ -30,12 +30,13 @@ public class FakeDependencyInjection {
     private static BookDisplayService bookDisplayService;
     private static Retrofit retrofit;
     private static Gson gson;
-    //private static BookDisplayRepository bookDisplayRepository;
+    private static BookDisplayRepository bookDisplayRepository;
     //private static BookDatabase bookDatabase;
     private static Context applicationContext;
     private static ViewModelFactory viewModelFactory;
 
-    /*
+
+
     public static ViewModelFactory getViewModelFactory() {
         if (viewModelFactory == null) {
             viewModelFactory = new ViewModelFactory(getBookDisplayRepository());
@@ -47,14 +48,13 @@ public class FakeDependencyInjection {
     public static BookDisplayRepository getBookDisplayRepository() {
         if (bookDisplayRepository == null) {
             bookDisplayRepository = new BookDisplayDataRepository(
-                    new BookDisplayLocalDataSource(getBookDatabase()),
-                    new BookDisplayRemoteDataSource(getBookDisplayService()),
-                    new BookToBookEntityMapper()
+                    //new BookDisplayLocalDataSource(getBookDatabase()),
+                    new BookDisplayRemoteDataSource(getBookDisplayService())//,
+                    //new BookToBookEntityMapper()
             );
         }
         return bookDisplayRepository;
     }
-     */
 
     public static BookDisplayService getBookDisplayService() {
         if (bookDisplayService == null) {
