@@ -64,6 +64,26 @@ public class BookDisplayDataRepository implements BookDisplayRepository {
 
     @Override
     public Completable deleteBook(String id) {
-        return null;
+        // Etape 1 :
+        Single<Book> book = bookDisplayRemoteDataSource.getBook(id);
+
+        // Etape 2 :
+        Single<BookEntity> bookEntitySingle = book.map(new Function<Book, BookEntity>() {
+            @Override
+            public BookEntity apply(Book book) throws Exception {
+                // Conversion : Appel au mapper
+                return null;
+            }
+        });
+
+        // Etape 3 :
+        Completable bookCompletable = bookEntitySingle.flatMapCompletable(new Function<BookEntity, CompletableSource>() {
+            @Override
+            public CompletableSource apply(BookEntity bookEntity) throws Exception {
+                return bookDisplayLocalDataSource.deleteBook(bookEntity);
+            }
+        });
+
+        return bookCompletable;
     }
 }
