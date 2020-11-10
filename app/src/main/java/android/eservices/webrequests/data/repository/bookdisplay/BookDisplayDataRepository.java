@@ -47,7 +47,7 @@ public class BookDisplayDataRepository implements BookDisplayRepository {
             @Override
             public BookEntity apply(Book book) throws Exception {
                 // Conversion : Appel au mapper
-                return null;
+                return BookToBookEntityMapper.convertBook(book);
             }
         });
 
@@ -72,7 +72,7 @@ public class BookDisplayDataRepository implements BookDisplayRepository {
             @Override
             public BookEntity apply(Book book) throws Exception {
                 // Conversion : Appel au mapper
-                return null;
+                return BookToBookEntityMapper.convertBook(book);
             }
         });
 
