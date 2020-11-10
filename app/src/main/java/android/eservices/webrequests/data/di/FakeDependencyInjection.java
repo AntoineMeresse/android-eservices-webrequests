@@ -51,8 +51,8 @@ public class FakeDependencyInjection {
     public static BookDisplayRepository getBookDisplayRepository() {
         if (bookDisplayRepository == null) {
             bookDisplayRepository = new BookDisplayDataRepository(
-                    //new BookDisplayLocalDataSource(getBookDatabase()),
-                    new BookDisplayRemoteDataSource(getBookDisplayService())//,
+                    new BookDisplayRemoteDataSource(getBookDisplayService()),
+                    new BookDisplayLocalDataSource(getBookDatabase())//,
                     //new BookToBookEntityMapper()
             );
         }
