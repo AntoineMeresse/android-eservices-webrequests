@@ -9,6 +9,7 @@ import java.util.List;
 
 import io.reactivex.Completable;
 import io.reactivex.Flowable;
+import io.reactivex.Single;
 
 @Dao
 public interface BookDAO {
@@ -21,4 +22,7 @@ public interface BookDAO {
 
     @Delete
     Completable deleteBook(BookEntity bookEntity);
+
+    @Query("SELECT id FROM books_entity")
+    Single<List<String>> getIdFavoriteBooks();
 }

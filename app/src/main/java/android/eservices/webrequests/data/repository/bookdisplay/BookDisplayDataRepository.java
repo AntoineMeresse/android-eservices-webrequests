@@ -12,6 +12,7 @@ import io.reactivex.Completable;
 import io.reactivex.CompletableSource;
 import io.reactivex.Flowable;
 import io.reactivex.Single;
+import io.reactivex.functions.BiFunction;
 import io.reactivex.functions.Function;
 
 // Demander au local ou au remote
@@ -27,7 +28,17 @@ public class BookDisplayDataRepository implements BookDisplayRepository {
 
     @Override
     public Single<BookSearchResponse> getBookSearchResponse(String keywords) {
-        return bookDisplayRemoteDataSource.searchBooks(keywords);
+        return bookDisplayRemoteDataSource.searchBooks(keywords).zipWith(bookDisplayLocalDataSource.getIDFavoriteBooks(), new BiFunction<BookSearchResponse, List<String>, BookSearchResponse>() {
+            @Override
+            public BookSearchResponse apply(BookSearchResponse bookSearchResponse, List<String> strings) throws Exception {
+                // Boucler et comparer les livres
+                List<Book> bookList = bookSearchResponse.getBookList();
+                for (Book book : bookList) {
+                    if(strings.contains(book.getId())) {book.setFavorite();}
+                }
+                return bookSearchResponse;
+            }
+        });
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////

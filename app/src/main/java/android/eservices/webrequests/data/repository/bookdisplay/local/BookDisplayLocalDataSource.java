@@ -8,6 +8,7 @@ import java.util.List;
 
 import io.reactivex.Completable;
 import io.reactivex.Flowable;
+import io.reactivex.Single;
 
 public class BookDisplayLocalDataSource {
 
@@ -27,4 +28,6 @@ public class BookDisplayLocalDataSource {
 
     // deleteBook
     public Completable deleteBook(BookEntity bookEntity) { return this.bookDAO.deleteBook(bookEntity);}
+
+    public Single<List<String>> getIDFavoriteBooks() { return this.bookDAO.getIdFavoriteBooks();}
 }
