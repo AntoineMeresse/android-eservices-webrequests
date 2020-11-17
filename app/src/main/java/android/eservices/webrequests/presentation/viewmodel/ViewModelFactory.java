@@ -20,6 +20,9 @@ public class ViewModelFactory implements ViewModelProvider.Factory {
             //return null;//
             return (T) new BookSearchViewModel(bookDisplayRepository);
         }
+        else if (modelClass.isAssignableFrom(BookFavoriteViewModel.class)) {
+            return (T) new BookFavoriteViewModel(bookDisplayRepository);
+        }
         //Handle favorite view model case
         throw new IllegalArgumentException("Unknown ViewModel class");
     }

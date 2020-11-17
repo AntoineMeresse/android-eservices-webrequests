@@ -39,7 +39,6 @@ public class FakeDependencyInjection {
     private static ViewModelFactory viewModelFactory;
 
 
-
     public static ViewModelFactory getViewModelFactory() {
         if (viewModelFactory == null) {
             viewModelFactory = new ViewModelFactory(getBookDisplayRepository());
